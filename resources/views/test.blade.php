@@ -6,24 +6,6 @@
 
 @section('body')
 
-    <!-- Контейнер Flexbox для выравнивания тостов -->
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center show align-items-center w-100 position-fixed"
-         style="z-index: 1001; left: 35%; bottom: 2%">
-
-    @if(session()->has('success'))
-        <!-- Затем положите тосты внутрь -->
-            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Coffee Like</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
-                </div>
-                <div class="toast-body">
-                    {{ session()->get('success') }}
-                </div>
-            </div>
-        @endif
-    </div>
-
     @if(session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show container mt-2" role="alert">
             {{ session()->get('success') }}
@@ -61,7 +43,7 @@
                                class="form-control rounded-0 shadow rounded-start @error('name') is-invalid @enderror"
                                id="floatingInput" placeholder="name@example.com0
                                value="{{ old('name') }}">
-                        <label for="floatingInput">Название новой темы</label>
+                        <label for="floatingInput" class="text-muted">Название нового раздела</label>
                         @error('name')
                         <div id="validationServer05Feedback" class="invalid-feedback">
                             {{ $message }}
@@ -82,7 +64,7 @@
 
                         {{--Кнопка редактирования--}}
                         <form action="{{ route('themes.update', ['theme' => $theme->id]) }}" method="POST"
-                              class=" d-flex align-items-center">
+                              class="d-flex align-items-center">
 
                             @csrf
                             @method('put')
@@ -108,9 +90,9 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Редактирование раздела</h5>
                                         </div>
-                                        <div class="fs-6 p-3 border-bottom underline">
-                                            <div class="fs-5 mb-2">Внимание!</div>
-                                            <div>Название раздела должно быть уникальным, и содержать не более 70 символов!</div>
+                                        <div class="fs-6 p-3 border-bottom underline text-start">
+                                            <div class="fs-3 mb-2 fst-normal">Внимание!</div>
+                                            <div class="fst-normal">Название раздела должно быть уникальным, и содержать не более 70 символов!</div>
                                         </div>
                                         <div class="p-3">
                                                 <textarea name="rename"
@@ -180,9 +162,17 @@
                             @if($article->theme_id === $theme->id)
                                 <div class="card shadow-sm" style="width: 18rem;">
                                     <a href="{{ route('articles.show', ['article' => $article->id]) }}" class="text-decoration-none text-black">
-                                        <img src="{{ asset('files/img/placeholder.jpg') }}" class="card-img-top" alt="{{ $article->title }}">
+
+                                        <img src="
+                                        @if(file_exists('storage/articles/' . $article->id . '/' . $article->photo))
+                                        {{ asset('storage/articles/' . $article->id . '/' . $article->photo) }}
+                                        @else
+                                        {{ asset('files/img/placeholder1.jpg') }}
+                                        @endif
+                                            "
+                                             class="card-img-top" height="161" width="286" alt="{{ $article->title }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $article->title }}</h5>
+                                            <h5 class="card-title m-0">{{ $article->title }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -191,8 +181,9 @@
 
                         <div class="card shadow-sm" style="width: 18rem;">
                             <a href="{{ route('articles.create', ['themeId' => $theme->id]) }}"
-                               class="text-decoration-none rounded text-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="15rem" height="15rem" viewBox="0 0 24 24"
+                               class="text-decoration-none rounded text-black d-flex justify-content-center align-items-center h-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary text-opacity-50" width="13rem" height="13rem"
+                                     viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                                 </svg>

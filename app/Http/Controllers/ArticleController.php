@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller {
@@ -31,13 +32,18 @@ class ArticleController extends Controller {
             'name' => 'required|max:70|unique:App\Models\Article,title',
             'theme' => 'required|numeric',
             'body' => 'nullable',
+            'photo' => 'nullable|max:2048|mimes:png,jpg,jpeg,svg'
         ]);
 
         $article = $article->create([
             'title' => $request->name,
             'theme_id' => $request->theme,
-            'body' => $request->body
+            'body' => $request->body,
+            'photo' => $request->file('photo') ? 'logo.' . $request->file('photo')->getClientOriginalExtension() : null
         ]);
+
+        if ($request->file('photo'))
+            $request->file('photo')->storeAs('articles/' . $article->id, 'logo.' . $request->file('photo')->getClientOriginalExtension());
 
         session()->flash('success', "Статья \"{$request->name}\" успешно создана!");
 
@@ -57,13 +63,20 @@ class ArticleController extends Controller {
             'name' => ['required', 'max:70', Rule::unique('articles', 'title')->ignore($article->id)],
             'theme' => 'required|numeric',
             'body' => 'nullable',
+            'photo' => 'nullable|max:2048|mimes:png,jpg,jpeg,svg'
         ]);
 
         $article->update([
             'title' => $request->name,
             'theme_id' => $request->theme,
-            'body' => $request->body
+            'body' => $request->body,
+            'photo' => $request->file('photo') ? 'logo.' . $request->file('photo')->getClientOriginalExtension() : $article->photo
         ]);
+
+        if ($request->file('photo')) {
+            Storage::deleteDirectory('articles/' . $article->id);
+            $request->file('photo')->storeAs('articles/' . $article->id, 'logo.' . $request->file('photo')->getClientOriginalExtension());
+        }
 
         session()->flash('success', "Статья \"{$request->name}\" успешно отредактирована!");
 
@@ -73,6 +86,7 @@ class ArticleController extends Controller {
     public function destroy(Article $article) {
 
         $article->delete();
+        Storage::deleteDirectory('articles/' . $article->id);
 
         session()->flash('success', 'Статья "' . $article->title . '" успешно удалена!');
 

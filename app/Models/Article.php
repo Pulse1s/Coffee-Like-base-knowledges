@@ -16,7 +16,8 @@ class Article extends Model {
     protected $fillable = [
         'title',
         'theme_id',
-        'body'
+        'body',
+        'photo'
     ];
 
 }

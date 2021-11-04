@@ -30,54 +30,60 @@
         Создание новой статьи
     </div>
 
-    <form action="{{ route('articles.store') }}" enctype="multipart/form-data" method="POST" class="container form-control mb-5">
+    <form action="{{ route('articles.store') }}" enctype="multipart/form-data" method="POST" class="container form-control border-0 mb-5">
+
         @csrf
-        <div class="fs-5 mt-2 ms-1 fw-bold">Создание новой записи</div>
-        <hr>
-        <ul>
-            <li class="@if($errors->first() == 'validation.unique')
-                fw-bold text-danger @endif">Название статьи должно быть уникальным!
-            </li>
-            <li class="@if($errors->first() == 'validation.required')
-                fw-bold text-danger @endif">Название статьи не должно быть пустым!
-            </li>
-            <li class="@if($errors->first() == 'validation.max.string')
-                fw-bold text-danger @endif">Название статьи не должно содержать больше 70 символов!
-            </li>
-        </ul>
-        <hr>
-        <ul>
-            <li class="">По-умолчанию выбрана та тема для привязки, в которой вы кликнули "Создать новую запись"</li>
-            <li class="">Для более быстрой и эффективной работы базы знаний загружайте картинки с расширением .png</li>
-        </ul>
-        <hr>
+
         <div class="mb-2">
             <label for="title" class="form-label">Название статьи</label>
-            <input type="text" name="name" class="form-control" id="title" value="{{ old('name') }}" placeholder="Введите название статьи"
+            <input type="text" name="name" class="form-control shadow @error('name') is-invalid @enderror" id="title" value="{{ old('name') }}"
+                   placeholder="Введите название статьи"
                    autocomplete="off">
+            @error('name')
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
+
         <div class="mb-2">
             <label for="theme" class="form-label">Выберите тему, к которой будет привязана статья</label>
-            <select name="theme" class="form-select" id="theme">
+            <select name="theme" class="form-select shadow" id="theme">
                 @foreach($themes as $theme)
                     @if($theme->id == $selectTheme)
-                        <option value="{{ $theme->id }}" selected>{{ 'ТЕМА № ' . ($loop->index + 1) . ': ' . Str::upper($theme->name) }}</option>
+                        <option value="{{ $theme->id }}" selected>{{ $theme->name }}</option>
                     @else
-                        <option value="{{ $theme->id }}">{{ 'ТЕМА № ' . ($loop->index + 1) . ': ' . Str::upper($theme->name) }}</option>
+                        <option value="{{ $theme->id }}">{{ $theme->name }}</option>
                     @endif
                 @endforeach
             </select>
         </div>
-        <div>
+
+        <div class="mb-2">
+            <label for="photo" class="form-label">Фотка к статье</label>
+            <input type="file" name="photo" class="form-control shadow @error('photo') is-invalid @enderror" id="photo" value="{{ old('photo') }}"
+                   placeholder="Фото к статье" accept="image/svg+xml,image/png,image/jpeg">
+            @error('photo')
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="">
             <label for="body" class="form-label">Статья</label>
-            <textarea id="summernote" class="visually-hidden" name="body">{{ old('body') }}</textarea>
-            <div id="summernote"></div>
+            <div class="shadow">
+                <textarea id="summernote" class="visually-hidden" name="body">{{ old('body') }}</textarea>
+                <div id="summernote"></div>
+            </div>
+
         </div>
-        </div>
-        <div class="mt-2 p-0 d-flex justify-content-end container">
+
+        <div class="mt-3 p-0 d-flex justify-content-end container">
             <a href="{{ route('test') }}" class="btn btn-secondary me-1">Отмена</a>
             <button type="submit" class="btn btn-success mt">Сохранить</button>
         </div>
+
     </form>
 
 

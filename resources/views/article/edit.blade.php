@@ -31,55 +31,53 @@
         Редактирование статьи
     </div>
 
-    <form action="{{ route('articles.update', ['article' => $article->id]) }}" method="POST" class="container form-control">
+    <form action="{{ route('articles.update', ['article' => $article->id]) }}" method="POST" class="container form-control border-0">
 
         @csrf
         @method('put')
 
-        <div class="fs-5 mt-2 ms-1 fw-bold">Редактирование записи</div>
-        <hr>
-        <ul>
-            <li class="@if($errors->first() == 'validation.unique')
-                fw-bold text-danger @endif">Название статьи должно быть уникальным!
-            </li>
-            <li class="@if($errors->first() == 'validation.required')
-                fw-bold text-danger @endif">Название статьи не должно быть пустым!
-            </li>
-            <li class="@if($errors->first() == 'validation.max.string')
-                fw-bold text-danger @endif">Название статьи не должно содержать больше 70 символов!
-            </li>
-        </ul>
-        <hr>
-        <ul>
-            <li class="">Для более быстрой и эффективной работы базы знаний загружайте картинки с расширением .png</li>
-        </ul>
-        <hr>
 
         <div class="mb-2">
             <label for="title" class="form-label">Название статьи</label>
-            <input type="text" name="name" class="form-control" id="title" placeholder="Введите название статьи" autocomplete="off"
+            <input type="text" name="name" class="form-control shadow" id="title" placeholder="Введите название статьи" autocomplete="off"
                    value="{{ $article->title }}">
         </div>
+
         <div class="mb-2">
             <label for="theme" class="form-label">Выберите тему, к которой будет привязана статья</label>
-            <select name="theme" class="form-select" id="theme">
+            <select name="theme" class="form-select shadow" id="theme">
                 @foreach($themes as $theme)
                     @if($theme->id == $article->theme_id)
-                        <option value="{{ $theme->id }}" selected>{{ 'ТЕМА № ' . ($loop->index + 1) . ': ' . Str::upper($theme->name) }}</option>
+                        <option value="{{ $theme->id }}" selected>{{ $theme->name }}</option>
                     @else
-                        <option value="{{ $theme->id }}">{{ 'ТЕМА № ' . ($loop->index + 1) . ': ' . Str::upper($theme->name) }}</option>
+                        <option value="{{ $theme->id }}">{{ $theme->name }}</option>
                     @endif
                 @endforeach
             </select>
-
         </div>
+
+        <div class="mb-2">
+            <label for="photo" class="form-label">Фотка к статье</label>
+            <input type="file" name="photo" class="form-control shadow @error('photo') is-invalid @enderror" id="photo" value="{{ old('photo') }}"
+                   placeholder="Фото к статье" accept="image/svg+xml,image/png,image/jpeg">
+            @error('photo')
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
         <div>
             <label for="body" class="form-label">Статья</label>
-            <textarea id="summernote" class="visually-hidden" name="body">{{ $article->body }}</textarea>
-            <div id="summernote"></div>
+            <div class="shadow">
+                <textarea id="summernote" class="visually-hidden" name="body">{{ $article->body }}</textarea>
+                <div id="summernote"></div>
+            </div>
+
         </div>
+
         </div>
-        <div class="mt-2 p-0 d-flex justify-content-end container">
+        <div class="mt-3 p-0 d-flex justify-content-end container">
             <a href="{{ route('articles.show', ['article' => $article->id]) }}" class="btn btn-secondary me-1">Отмена</a>
             <button type="submit" class="btn btn-success mt">Сохранить</button>
         </div>
@@ -92,7 +90,7 @@
 @push('scripts-footer')
     <script>
         $('#summernote').summernote({
-            placeholder: 'Начни писать статью ',
+            placeholder: 'Начни писать статью здесь',
             lang: 'ru-RU',
             tabsize: 2,
             height: 300,
@@ -101,7 +99,7 @@
                 ['font', ['italic', 'bold', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
                 ['fontname', ['fontname', 'fontsize', 'height', 'color']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['hr', 'link', 'picture', 'table']],
+                ['insert', ['hr', 'link', 'picture', 'video', 'table']],
                 ['edit', ['undo', 'redo']],
                 ['view', ['help']],
 
