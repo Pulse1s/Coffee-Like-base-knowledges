@@ -140,9 +140,9 @@
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="staticBackdropLabel">Удаление раздела</h5>
                                             </div>
-                                            <div class="fs-6 p-3">
-                                                <div class="fs-5 mb-2">Внимание!</div>
-                                                <div>После удаления, восстановление данных невозможно! Вместе с разделом <u class="text-danger">удаляются
+                                            <div class="fs-6 p-3 text-start">
+                                                <div class="fs-3 mb-2 fst-normal">Внимание!</div>
+                                                <div class="fst-normal">После удаления, восстановление данных невозможно! Вместе с разделом <u class="text-danger">удаляются
                                                         все
                                                         подразделы!</u></div>
                                             </div>
