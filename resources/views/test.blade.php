@@ -44,7 +44,7 @@
                                    class="form-control rounded-0 shadow rounded-start @error('name') is-invalid @enderror"
                                    id="floatingInput" placeholder="name@example.com0
                                value="{{ old('name') }}">
-                            <label for="floatingInput" class="text-muted">Название нового раздела</label>
+                            <label for="floatingInput" class="text-muted text-truncate">Название нового раздела</label>
                             @error('name')
                             <div id="validationServer05Feedback" class="invalid-feedback">
                                 {{ $message }}
@@ -60,9 +60,9 @@
         @foreach($themes as $theme)
 
             <div style="@if($loop->odd) background-color: #f5f5f5; @endif">
-                <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center container">
-                    <h1 class="display-5 mb-5 d-flex justify-content-center align-items-end">
-                        <span class="me-1">{{ $theme->name }}</span>
+                <div class="pricing-header p-3 pt-md-1 pb-md-4 mx-auto text-center container">
+                    <h1 class="mb-5 mt-4 d-flex justify-content-center align-items-end">
+                        <span class="me-1 display-3">{{ $theme->name }}</span>
 
                         @can('admin')
                             {{--Кнопка редактирования--}}
@@ -72,7 +72,7 @@
                                 @csrf
                                 @method('put')
 
-                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button"
+                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-md-2" type="button"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalUpdate{{ $theme->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" width="1.5rem" height="1.5rem" fill="none"
@@ -94,8 +94,8 @@
                                                 <h5 class="modal-title" id="staticBackdropLabel">Редактирование раздела</h5>
                                             </div>
                                             <div class="fs-6 p-3 border-bottom underline text-start">
-                                                <div class="fs-3 mb-2 fst-normal">Внимание!</div>
-                                                <div class="fst-normal">Название раздела должно быть уникальным, и содержать не более 70 символов!
+                                                <div class="fs-5 mb-2">Внимание!</div>
+                                                <div>Название раздела должно быть уникальным, и содержать не более 70 символов!
                                                 </div>
                                             </div>
                                             <div class="p-3">
@@ -121,7 +121,7 @@
                                 @csrf
                                 @method('delete')
 
-                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button" data-bs-toggle="modal"
+                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-md-2" type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalDelete{{ $theme->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" fill="none" width="1.5rem" height="1.5rem"
                                          viewBox="0 0 24 24" stroke="currentColor">
@@ -141,8 +141,11 @@
                                                 <h5 class="modal-title" id="staticBackdropLabel">Удаление раздела</h5>
                                             </div>
                                             <div class="fs-6 p-3 text-start">
-                                                <div class="fs-3 mb-2 fst-normal">Внимание!</div>
-                                                <div class="fst-normal">После удаления, восстановление данных невозможно! Вместе с разделом <u class="text-danger">удаляются
+                                                <div class="fs-4 mb-2">Внимание!</div>
+                                                <div>После удаления, восстановление данных невозможно!
+                                                    Вместе
+                                                    с разделом <u
+                                                        class="text-danger">удаляются
                                                         все
                                                         подразделы!</u></div>
                                             </div>
@@ -212,7 +215,6 @@
 
 
     @endcan
-
 @endsection
 
 @push('scripts-footer')

@@ -1,6 +1,6 @@
 <style>
     html {
-        overflow-y: scroll;
+        /*overflow-y: scroll;*/
         position: relative;
         min-height: 100%;
     }
