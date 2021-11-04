@@ -5,7 +5,7 @@
 @section('body')
 
     <main class="justify-content-center d-flex text-center h-100 align-items-center border-secondary w-100">
-        <form class="col-4" method="POST" action="{{ route('password.email') }}">
+        <form class="col-lg-4 col-md-6 col-10" method="POST" action="{{ route('password.email') }}">
 
             @if(session('status'))
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
