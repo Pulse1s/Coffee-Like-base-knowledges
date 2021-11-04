@@ -62,7 +62,7 @@
             <div style="@if($loop->odd) background-color: #f5f5f5; @endif">
                 <div class="pricing-header p-3 pt-md-1 pb-md-4 mx-auto text-center container">
                     <h1 class="mb-5 mt-4 d-flex justify-content-center align-items-end">
-                        <span class="me-1 display-3">{{ $theme->name }}</span>
+                        <span class="me-1 display-4">{{ $theme->name }}</span>
 
                         @can('admin')
                             {{--Кнопка редактирования--}}
