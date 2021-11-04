@@ -58,7 +58,7 @@
                     @csrf
                     <div class="form-floating flex-grow-1">
                         <input type="text" name="name" autocomplete="off"
-                               class="form-control rounded-0 rounded-start @error('name') is-invalid @enderror"
+                               class="form-control rounded-0 shadow rounded-start @error('name') is-invalid @enderror"
                                id="floatingInput" placeholder="name@example.com0
                                value="{{ old('name') }}">
                         <label for="floatingInput">Название новой темы</label>
@@ -68,7 +68,7 @@
                         </div>
                         @enderror
                     </div>
-                    <button class="btn btn-success col-4 col-md-3" type="submit" style="height: 3.625rem;">Добваить</button>
+                    <button class="btn btn-success col-4 col-md-3 shadow" type="submit" style="height: 3.625rem;">Добваить</button>
                 </form>
             </div>
         </div>

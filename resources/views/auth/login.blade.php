@@ -4,7 +4,7 @@
 
 @section('body')
     <main class="justify-content-center d-flex text-center h-100 align-items-center border-secondary">
-        <form class="col-3" method="POST" action="{{ route('login') }}">
+        <form class="col-lg-4 col-md-6 col-10" method="POST" action="{{ route('login') }}">
 
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show text-start" role="alert">

@@ -2,7 +2,7 @@
     <div class="container position-relative">
 
         <div class="form-floating mb-3">
-            <input class="form-control" type="text" wire:model="word" placeholder="Поиск по базе знаний">
+            <input class="form-control shadow" type="text" wire:model="word" placeholder="Поиск по базе знаний">
             <label for="floatingInput" class="text-muted">Поиск по базе знаний</label>
         </div>
 
