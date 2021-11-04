@@ -1,4 +1,4 @@
-<div class="py-5 my-3 text-center">
+<div class="py-4 my-2 text-center">
     <div class="container position-relative">
 
         <div class="form-floating mb-3">
