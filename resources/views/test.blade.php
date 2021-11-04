@@ -34,26 +34,28 @@
             <livewire:search/>
         </div>
 
-        <div class="bg-secondary bg-opacity-25">
-            <div class="container d-flex justify-content-center py-5 col-11 col-lg-7">
-                <form class="input-group flex-nowrap" method="POST" action="{{ route('themes.store') }}">
-                    @csrf
-                    <div class="form-floating flex-grow-1">
-                        <input type="text" name="name" autocomplete="off"
-                               class="form-control rounded-0 shadow rounded-start @error('name') is-invalid @enderror"
-                               id="floatingInput" placeholder="name@example.com0
+        @can('admin')
+            <div class="bg-secondary bg-opacity-25">
+                <div class="container d-flex justify-content-center py-5 col-11 col-lg-7">
+                    <form class="input-group flex-nowrap" method="POST" action="{{ route('themes.store') }}">
+                        @csrf
+                        <div class="form-floating flex-grow-1">
+                            <input type="text" name="name" autocomplete="off"
+                                   class="form-control rounded-0 shadow rounded-start @error('name') is-invalid @enderror"
+                                   id="floatingInput" placeholder="name@example.com0
                                value="{{ old('name') }}">
-                        <label for="floatingInput" class="text-muted">Название нового раздела</label>
-                        @error('name')
-                        <div id="validationServer05Feedback" class="invalid-feedback">
-                            {{ $message }}
+                            <label for="floatingInput" class="text-muted">Название нового раздела</label>
+                            @error('name')
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
-                        @enderror
-                    </div>
-                    <button class="btn btn-success col-4 col-md-3 shadow" type="submit" style="height: 3.625rem;">Добваить</button>
-                </form>
+                        <button class="btn btn-success col-4 col-md-3 shadow" type="submit" style="height: 3.625rem;">Добваить</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endcan
 
         @foreach($themes as $theme)
 
@@ -62,97 +64,100 @@
                     <h1 class="display-5 mb-5 d-flex justify-content-center align-items-end">
                         <span class="me-1">{{ $theme->name }}</span>
 
-                        {{--Кнопка редактирования--}}
-                        <form action="{{ route('themes.update', ['theme' => $theme->id]) }}" method="POST"
-                              class="d-flex align-items-center">
+                        @can('admin')
+                            {{--Кнопка редактирования--}}
+                            <form action="{{ route('themes.update', ['theme' => $theme->id]) }}" method="POST"
+                                  class="d-flex align-items-center">
 
-                            @csrf
-                            @method('put')
+                                @csrf
+                                @method('put')
 
-                            <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalUpdate{{ $theme->id }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" width="1.5rem" height="1.5rem" fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                                </svg>
-                            </button>
+                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalUpdate{{ $theme->id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" width="1.5rem" height="1.5rem" fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
 
-                            {{--Модльное окно--}}
-                            <div class="modal fade" id="modalUpdate{{ $theme->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                                 tabindex="-1"
-                                 aria-labelledby="staticBackdropLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Редактирование раздела</h5>
-                                        </div>
-                                        <div class="fs-6 p-3 border-bottom underline text-start">
-                                            <div class="fs-3 mb-2 fst-normal">Внимание!</div>
-                                            <div class="fst-normal">Название раздела должно быть уникальным, и содержать не более 70 символов!</div>
-                                        </div>
-                                        <div class="p-3">
+                                {{--Модльное окно--}}
+                                <div class="modal fade" id="modalUpdate{{ $theme->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                                     tabindex="-1"
+                                     aria-labelledby="staticBackdropLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Редактирование раздела</h5>
+                                            </div>
+                                            <div class="fs-6 p-3 border-bottom underline text-start">
+                                                <div class="fs-3 mb-2 fst-normal">Внимание!</div>
+                                                <div class="fst-normal">Название раздела должно быть уникальным, и содержать не более 70 символов!
+                                                </div>
+                                            </div>
+                                            <div class="p-3">
                                                 <textarea name="rename"
                                                           class="form-control" placeholder="Введите новое название рздела"></textarea>
-                                        </div>
+                                            </div>
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
-                                            <button type="submit" class="btn btn-success">Изменить</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--Конец модльного окна--}}
-
-                        </form>
-
-
-                        {{--Кнопка удаления--}}
-                        <form action="{{ route('themes.destroy', ['theme' => $theme->id]) }}" method="POST" class="d-flex align-items-center">
-
-                            @csrf
-                            @method('delete')
-
-                            <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#modalDelete{{ $theme->id }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" fill="none" width="1.5rem" height="1.5rem"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </button>
-
-                            {{--Модльное окно--}}
-                            <div class="modal fade" id="modalDelete{{ $theme->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                                 tabindex="-1"
-                                 aria-labelledby="staticBackdropLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Удаление раздела</h5>
-                                        </div>
-                                        <div class="fs-6 p-3">
-                                            <div class="fs-5 mb-2">Внимание!</div>
-                                            <div>После удаления, восстановление данных невозможно! Вместе с разделом <u class="text-danger">удаляются
-                                                    все
-                                                    подразделы!</u></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
-                                            <button type="submit" class="btn btn-success">Удалить</button>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                                                <button type="submit" class="btn btn-success">Изменить</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{--Конец модльного окна--}}
+                                {{--Конец модльного окна--}}
 
-                        </form>
-                        {{--Конец кнопки удаления--}}
+                            </form>
+                            {{--Конец кнопки редактирования--}}
+
+                            {{--Кнопка удаления--}}
+                            <form action="{{ route('themes.destroy', ['theme' => $theme->id]) }}" method="POST" class="d-flex align-items-center">
+
+                                @csrf
+                                @method('delete')
+
+                                <button class="text-black btn d-flex align-items-center shadow-none px-1 mb-1" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#modalDelete{{ $theme->id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary" fill="none" width="1.5rem" height="1.5rem"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+
+                                {{--Модльное окно--}}
+                                <div class="modal fade" id="modalDelete{{ $theme->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                                     tabindex="-1"
+                                     aria-labelledby="staticBackdropLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Удаление раздела</h5>
+                                            </div>
+                                            <div class="fs-6 p-3">
+                                                <div class="fs-5 mb-2">Внимание!</div>
+                                                <div>После удаления, восстановление данных невозможно! Вместе с разделом <u class="text-danger">удаляются
+                                                        все
+                                                        подразделы!</u></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                                                <button type="submit" class="btn btn-success">Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Конец модльного окна--}}
+
+                            </form>
+                            {{--Конец кнопки удаления--}}
+                        @endcan
 
                     </h1>
 
@@ -179,16 +184,18 @@
                             @endif
                         @endforeach
 
-                        <div class="card shadow-sm" style="width: 18rem;">
-                            <a href="{{ route('articles.create', ['themeId' => $theme->id]) }}"
-                               class="text-decoration-none rounded text-black d-flex justify-content-center align-items-center h-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary text-opacity-50" width="13rem" height="13rem"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                                </svg>
-                            </a>
-                        </div>
+                        @can('admin')
+                            <div class="card shadow-sm" style="width: 18rem;">
+                                <a href="{{ route('articles.create', ['themeId' => $theme->id]) }}"
+                                   class="text-decoration-none rounded text-black d-flex justify-content-center align-items-center h-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-secondary text-opacity-50" width="13rem" height="13rem"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        @endcan
 
                     </div>
                 </div>
