@@ -9,19 +9,16 @@ class Userlist extends Component {
 
     public $users;
     public $count = 0;
+    public $search;
 
 
     public function render() {
+
         return view('livewire.userlist');
     }
 
     public function mount() {
         $this->users = User::all();
-    }
-
-    public function searchUser($search) {
-        $result = $this->users->where('first_name', 'like', $search);
-        $this->users = $result;
     }
 
     public function activate(User $user) {

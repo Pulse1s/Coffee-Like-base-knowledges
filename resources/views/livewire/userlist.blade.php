@@ -1,10 +1,10 @@
 <div style="overflow-x: auto;">
 
-{{--    <div class="d-flex justify-content-center ">--}}
-    {{--        <div class="col-8">--}}
-    {{--            <input type="text" class="form-control shadow-none" wire:click="searchUser">--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
+    <div class="d-flex justify-content-center my-3">
+        <div class="col-8">
+            <input type="text" class="form-control shadow-none" wire:model="search" placeholder="Введите имя/фамилию">
+        </div>
+    </div>
 
     <table class="table table-hover">
         <thead>
@@ -31,7 +31,16 @@
         </thead>
         <tbody>
 
-        @foreach($users as $user)
+
+        @foreach($users->filter(
+        function ($value, $key) use($search) {
+            if($search)
+                return str_contains($value['first_name'], mb_convert_case($search, MB_CASE_TITLE, "UTF-8"))
+                or str_contains($value['last_name'], mb_convert_case($search, MB_CASE_TITLE, "UTF-8"));
+            else
+                return $value;
+             }) as $user)
+
             <tr class="@if($user->active) table-success @else table-danger @endif">
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->first_name }}</td>
