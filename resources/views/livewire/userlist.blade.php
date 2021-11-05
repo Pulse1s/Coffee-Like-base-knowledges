@@ -1,4 +1,11 @@
 <div style="overflow-x: auto;">
+
+{{--    <div class="d-flex justify-content-center ">--}}
+    {{--        <div class="col-8">--}}
+    {{--            <input type="text" class="form-control shadow-none" wire:click="searchUser">--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -32,11 +39,6 @@
                 <td>+7{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
                 <td>@if($user->admin) <span class="text-danger">[adm]</span> @else
-                        {{--                            <form action="{{ route('users.activate', ['user' => $user->id]) }}" method="POST">--}}
-                        {{--                                @csrf--}}
-                        {{--                                <button class="btn py-0 border- border-secondary"--}}
-                        {{--                                        type="submit">{{ $user->active ? 'Да' : 'Нет' }}</button>--}}
-                        {{--                            </form>--}}
                         <button class="btn py-0 border- border-secondary"
                                 type="button" wire:click="activate({{ $user->id }})">{{ $user->active ? 'Да' : 'Нет' }}</button>
                     @endif </td>
