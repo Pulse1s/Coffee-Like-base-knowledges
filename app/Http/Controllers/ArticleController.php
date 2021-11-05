@@ -32,7 +32,7 @@ class ArticleController extends Controller {
             'name' => 'required|max:70|unique:App\Models\Article,title',
             'theme' => 'required|numeric',
             'body' => 'nullable',
-            'photo' => 'nullable|max:2048|mimes:png,jpg,jpeg,svg'
+            'photo' => 'nullable|max:20480|image'
         ]);
 
         $article = $article->create([
