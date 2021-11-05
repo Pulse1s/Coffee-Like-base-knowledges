@@ -63,7 +63,7 @@ class ArticleController extends Controller {
             'name' => ['required', 'max:70', Rule::unique('articles', 'title')->ignore($article->id)],
             'theme' => 'required|numeric',
             'body' => 'nullable',
-            'photo' => 'nullable|max:2048|image'
+            'photo' => 'nullable|max:20480|image'
         ]);
 
         $article->update([
