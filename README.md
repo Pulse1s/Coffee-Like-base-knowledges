@@ -1,65 +1,34 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><img src="https://cdn1.zp.ru/job/attaches/2018/11/97/e3/97e34a40094b7f3526648d12645d406c.png" height="280"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h1 align="center">База знаний по кофе, для Coffee Like</h1>
 
-## About Laravel
+<p align="center">Выпала возможность разработать базу знаний для крутых ребят из Coffee Like Киров!</p>
+<p align="center">Спасибо им за предоставленную возможность!</p>
+<br>
+<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h2>О проектe</h2>
+<p>Приватный проект базы знаний для Coffee Like Киров (а возможно и не только Киров) создаётся с целью объединения и консолидации знаний по кофе и работы с кофе в одном месте, для удобного доступа к ним всем действующим сотрудникам.</p> 
+<p>Для разработки используется удобный, гибкий, функциональный фул-стак фреймворк Laravel. Для верстки я применяю Boostrap.</p>
+<h3>Основные задачи проекта</h3>
+<ul>
+  <li>Сбор и упорядочивание всей информации в <b>полном</b> и <b>актуальном</b> виде</li>
+  <li>Доступ к информации только сотрудников Coffee Like</li>
+  <li>Работа по оповещению и оценке сотрудников</li>
+</ul>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<h2>От себя</h2>
+<p>Для меня это важный опыт и отличная возможность углубить, а также укрепить свои знания в Веб-разработке, в частности в работе с Php и Laravel. Так же приятна возложенная ответственность по разработке для крупной и успешной компании, как Coffee Like Киров.</p> 
+<p>Задача интересная и глубокая, требующая полного погружения. Отношусь к ней с энтузиазмом и бросаю на неё практически всё свободное время. Работы сделано уже немало, но ещё больше предстоит сделать.</p> 
+<h3>Мой "To Do List"</h3>
+<ul>
+  <li><strike>Создание базовых крудов для разделов и подразделов</strike></li>
+  <li><strike>Реализация базовой аутентификации</strike></li>
+  <li><strike>Настройка доступа к крудам через политик</strike>и</li>
+  <li><strike>Постепенное внедрение в проект асинхронного js в виде Livewire</strike></li>
+  <li><strike>Реализация поиска и фильтрации по сотрудникам</strike></li>
+  <li>До настройка полнотекстового поиска по базе знаний</li>
+  <li>Добавление ленты новостей</li>
+  <li>Реализация "рейтинга" сотрудников</li>
+  <li>Скорее всего задач прибавится!</li>
+</ul>
