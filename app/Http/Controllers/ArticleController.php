@@ -28,11 +28,13 @@ class ArticleController extends Controller {
 
     public function store(Request $request, Article $article) {
 
+//        dd($request->file('photo'));
+
         $request->validate([
             'name' => 'required|max:70|unique:App\Models\Article,title',
             'theme' => 'required|numeric',
             'body' => 'nullable',
-            'photo' => 'nullable|max:20480|image'
+            'photo' => 'nullable|max:20480'
         ]);
 
         $article = $article->create([
@@ -59,11 +61,13 @@ class ArticleController extends Controller {
 
     public function update(Request $request, Article $article) {
 
+//        dd($request->file('photo'));
+
         $request->validate([
             'name' => ['required', 'max:70', Rule::unique('articles', 'title')->ignore($article->id)],
             'theme' => 'required|numeric',
             'body' => 'nullable',
-            'photo' => 'nullable|max:20480|image'
+            'photo' => 'nullable|max:20480'
         ]);
 
         $article->update([
