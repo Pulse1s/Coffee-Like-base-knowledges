@@ -31,7 +31,8 @@
         Редактирование статьи
     </div>
 
-    <form action="{{ route('articles.update', ['article' => $article->id]) }}" method="POST" class="container form-control border-0">
+    <form action="{{ route('articles.update', ['article' => $article->id]) }}" enctype="multipart/form-data" method="POST"
+          class="container form-control border-0">
 
         @csrf
         @method('put')
@@ -58,7 +59,7 @@
 
         <div class="mb-2">
             <label for="photo" class="form-label">Фотка к статье</label>
-            <input type="file" name="photo" class="form-control shadow @error('photo') is-invalid @enderror" id="photo" value="{{ old('photo') }}"
+            <input type="file" name="photo" class="form-control shadow @error('photo') is-invalid @enderror" id="photo"
                    placeholder="Фото к статье" accept="image/svg+xml,image/png,image/jpeg">
             @error('photo')
             <div id="validationServerUsernameFeedback" class="invalid-feedback">

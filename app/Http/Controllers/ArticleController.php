@@ -28,8 +28,6 @@ class ArticleController extends Controller {
 
     public function store(Request $request, Article $article) {
 
-//        dd($request->file('photo'));
-
         $request->validate([
             'name' => 'required|max:70|unique:App\Models\Article,title',
             'theme' => 'required|numeric',
@@ -61,7 +59,7 @@ class ArticleController extends Controller {
 
     public function update(Request $request, Article $article) {
 
-//        dd($request->file('photo'));
+        dd($request->file('photo'));
 
         $request->validate([
             'name' => ['required', 'max:70', Rule::unique('articles', 'title')->ignore($article->id)],
