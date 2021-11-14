@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller {
@@ -35,15 +36,17 @@ class ArticleController extends Controller {
             'photo' => 'nullable|max:20480'
         ]);
 
+        $name = $request->file('photo') ? Str::uuid() . '.' . $request->file('photo')->getClientOriginalExtension() : null;
+
         $article = $article->create([
             'title' => $request->name,
             'theme_id' => $request->theme,
             'body' => $request->body,
-            'photo' => $request->file('photo') ? 'logo.' . $request->file('photo')->getClientOriginalExtension() : null
+            'photo' => $name
         ]);
 
         if ($request->file('photo'))
-            $request->file('photo')->storeAs('articles/' . $article->id, 'logo.' . $request->file('photo')->getClientOriginalExtension());
+            $request->file('photo')->storeAs('articles/' . $article->id, $name);
 
         session()->flash('success', "Статья \"{$request->name}\" успешно создана!");
 
@@ -66,16 +69,18 @@ class ArticleController extends Controller {
             'photo' => 'nullable|max:20480'
         ]);
 
+        $name = $request->file('photo') ? Str::uuid() . '.' . $request->file('photo')->getClientOriginalExtension() : $article->photo;
+
         $article->update([
             'title' => $request->name,
             'theme_id' => $request->theme,
             'body' => $request->body,
-            'photo' => $request->file('photo') ? 'logo.' . $request->file('photo')->getClientOriginalExtension() : $article->photo
+            'photo' => $name
         ]);
 
         if ($request->file('photo')) {
             Storage::deleteDirectory('articles/' . $article->id);
-            $request->file('photo')->storeAs('articles/' . $article->id, 'logo.' . $request->file('photo')->getClientOriginalExtension());
+            $request->file('photo')->storeAs('articles/' . $article->id, $name);
         }
 
         session()->flash('success', "Статья \"{$request->name}\" успешно отредактирована!");

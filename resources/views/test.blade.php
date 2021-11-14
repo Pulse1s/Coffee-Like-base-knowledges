@@ -20,7 +20,6 @@
     </div>
     @enderror
 
-
     @can('user')
 
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center container col-12 col-lg-7">
@@ -208,11 +207,9 @@
 
     @else
 
-
         <div class="alert container text-center alert-warning alert-dismissible fade show mt-3" role="alert">
             Ваш аккаунт не активирован! Пожалуйста обратитесь к руководителю!
         </div>
-
 
     @endcan
 @endsection
